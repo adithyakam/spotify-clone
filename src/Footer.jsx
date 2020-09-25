@@ -96,8 +96,19 @@ function Footer({ spotify }) {
       <div className="footer_middle">
         <ShuffleIcon className="footer_green" />
         <SkipPreviousIcon className="footer_icon" />
-        <PlayCircleOutlineIcon fontSize="large" className="footer_icon" />
-
+        {playing ? (
+          <PauseCircleOutlineIcon
+            onClick={handlePlayPause}
+            fontSize="large"
+            className="footer_icon"
+          />
+        ) : (
+          <PlayCircleOutlineIcon
+            onClick={handlePlayPause}
+            fontSize="large"
+            className="footer_icon"
+          />
+        )}
         <SkipPreviousIcon className="footer_icon" />
         <RepeatIcon className="footer_green" />
       </div>

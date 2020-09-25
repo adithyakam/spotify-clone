@@ -10,11 +10,10 @@ import SongRow from "./SongRow";
 function Body({ spotify }) {
   const [{ discover_weekly }, dispatch] = useStateValue();
 
-  const playSong = (id) => {
-    console.log(`spotify:track:${id}`);
+  const playPlaylist = (id) => {
     spotify
       .play({
-        uris: [`spotify:track:${id}`],
+        context_uri: `spotify:playlist:37i9dQZEVXcJZyENOWUFo7`,
       })
       .then((res) => {
         spotify.getMyCurrentPlayingTrack().then((r) => {
@@ -30,6 +29,31 @@ function Body({ spotify }) {
       });
   };
 
+  const playSong = (id) => {
+    console.log(`spotify:track:${id}`);
+    try {
+      spotify
+        .play({
+          uris: [`spotify:track:${id}`],
+        })
+        .then((res) => {
+          console.log(res);
+          spotify.getMyCurrentPlayingTrack().then((r) => {
+            dispatch({
+              type: "SET_ITEM",
+              item: r.item,
+            });
+            dispatch({
+              type: "SET_PLAYING",
+              playing: true,
+            });
+          });
+        });
+    } catch (error) {
+      console.log(error, "Errrrrrrrr");
+    }
+  };
+
   return (
     <div className="body">
       <Header spotify={spotify} />
@@ -43,7 +67,10 @@ function Body({ spotify }) {
       </div>
       <div className="body_songs">
         <div className="body_icons">
-          <PlayCircleFilledIcon className="body_shuffle" />
+          <PlayCircleFilledIcon
+            className="body_shuffle"
+            onClick={playPlaylist}
+          />
           <FavoriteIcon fontSize="large" />
           <MoreHorizIcon />
         </div>
