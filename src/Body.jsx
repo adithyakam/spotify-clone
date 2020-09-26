@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./body.css";
 import Header from "./Header";
 import { useStateValue } from "./StateProvider";
@@ -9,7 +9,6 @@ import SongRow from "./SongRow";
 
 function Body({ spotify }) {
   const [{ discover_weekly }, dispatch] = useStateValue();
-
   const playPlaylist = (id) => {
     spotify
       .play({
@@ -30,28 +29,25 @@ function Body({ spotify }) {
   };
 
   const playSong = (id) => {
-    console.log(`spotify:track:${id}`);
-    try {
-      spotify
-        .play({
-          uris: [`spotify:track:${id}`],
-        })
-        .then((res) => {
-          console.log(res);
-          spotify.getMyCurrentPlayingTrack().then((r) => {
-            dispatch({
-              type: "SET_ITEM",
-              item: r.item,
-            });
-            dispatch({
-              type: "SET_PLAYING",
-              playing: true,
-            });
+    spotify
+      .play({
+        uris: [`spotify:track:${id}`],
+      })
+      .then((res) => {
+        spotify.getMyCurrentPlayingTrack().then((r) => {
+          dispatch({
+            type: "SET_ITEM",
+            item: r.item,
+          });
+          dispatch({
+            type: "SET_PLAYING",
+            playing: true,
           });
         });
-    } catch (error) {
-      console.log(error, "Errrrrrrrr");
-    }
+        {
+          console.log("itemset");
+        }
+      });
   };
 
   return (
@@ -75,7 +71,7 @@ function Body({ spotify }) {
           <MoreHorizIcon />
         </div>
         {discover_weekly?.tracks.items.map((item) => (
-          <SongRow playSong={playSong} track={item.track} />
+          <SongRow playSong={playSong} track={item.track} key={item.id} />
         ))}
       </div>
     </div>

@@ -14,11 +14,8 @@ import { Grid, Slider } from "@material-ui/core";
 
 function Footer({ spotify }) {
   const [{ token, item, playing }, dispatch] = useStateValue();
-  console.log(item, playing, "Gooyer");
   useEffect(() => {
     spotify.getMyCurrentPlaybackState().then((r) => {
-      console.log(r);
-
       dispatch({
         type: "SET_PLAYING",
         playing: r.is_playing,
@@ -29,7 +26,7 @@ function Footer({ spotify }) {
         item: r.item,
       });
     });
-  }, [spotify]);
+  }, [spotify, item]);
   const handlePlayPause = () => {
     if (playing) {
       spotify.pause();
@@ -57,6 +54,20 @@ function Footer({ spotify }) {
         playing: true,
       });
     });
+    spotify.skipToNext();
+    spotify.getMyCurrentPlayingTrack().then((r) => {
+      dispatch({
+        type: "SET_ITEM",
+        item: r.item,
+      });
+      dispatch({
+        type: "SET_PLAYING",
+        playing: true,
+      });
+      {
+        console.log("next");
+      }
+    });
   };
 
   const skipPrevious = () => {
@@ -70,6 +81,9 @@ function Footer({ spotify }) {
         type: "SET_PLAYING",
         playing: true,
       });
+      {
+        console.log("previous");
+      }
     });
   };
 
@@ -95,7 +109,7 @@ function Footer({ spotify }) {
       </div>
       <div className="footer_middle">
         <ShuffleIcon className="footer_green" />
-        <SkipPreviousIcon className="footer_icon" />
+        <SkipPreviousIcon className="footer_icon" onClick={skipPrevious} />
         {playing ? (
           <PauseCircleOutlineIcon
             onClick={handlePlayPause}
@@ -109,7 +123,7 @@ function Footer({ spotify }) {
             className="footer_icon"
           />
         )}
-        <SkipPreviousIcon className="footer_icon" />
+        <SkipNextIcon className="footer_icon" onClick={skipNext} />
         <RepeatIcon className="footer_green" />
       </div>
       <div className="footer_rigth">

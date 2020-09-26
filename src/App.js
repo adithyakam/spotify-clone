@@ -7,7 +7,6 @@ import Player from "./Player";
 import { useStateValue } from "./StateProvider";
 
 const spotify = new SpotifyWebApi();
-
 function App() {
   const [{ token }, dispatch] = useStateValue();
 
@@ -52,8 +51,6 @@ function App() {
         });
       });
     }
-
-    console.log("havetoken", token);
   }, []);
 
   return (
