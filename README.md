@@ -1,5 +1,7 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is an spotify clone app where user can control songs,playlist,tracks playing.
+!important ->need premium spotify account as it is using spotify API
 
+---
 ## Available Scripts
 
 In the project directory, you can run:
