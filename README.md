@@ -2,6 +2,7 @@ This is an spotify clone app where user can control songs,playlist,tracks playin
 !important ->need premium spotify account as it is using spotify API
 
 ---
+
 ## Available Scripts
 
 In the project directory, you can run:
