@@ -5,7 +5,7 @@ import { Avatar } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { useEffect } from "react";
 
-function Header() {
+function Header({ spotify }) {
   const [{ user }, dispatch] = useStateValue();
 
   return (
@@ -18,9 +18,7 @@ function Header() {
         />
       </div>
       <div className="header_right">
-        {console.log(user)}
         <Avatar src={user?.images[0]?.url} alt={user?.display_name} />
-
         <h4>{user?.display_name}</h4>
       </div>
     </div>
