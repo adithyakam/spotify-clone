@@ -3,6 +3,9 @@ import "./login.css";
 import { accessUrl } from "./spotify";
 
 function Login() {
+  {
+    alert("Hi, thanks for login need premium accontto work this!!!");
+  }
   return (
     <div className="login">
       <img

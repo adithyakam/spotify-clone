@@ -23,7 +23,6 @@ function SideBar() {
       <br />
       <strong classname="sidebarTitle">PLAYLIST</strong>
       <hr />
-      {console.log(playlist, "kaljdfkljl")}
       {playlist?.items?.map((playlist) => (
         <SideBarOption title={playlist.name} key={playlist.id} />
       ))}
