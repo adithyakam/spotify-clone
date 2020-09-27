@@ -4,7 +4,9 @@ import { accessUrl } from "./spotify";
 
 function Login() {
   {
-    alert("Hi, thanks for login need premium accontto work this!!!");
+    alert(
+      "Hi, thanks for login need premium account to work this & also one active session of spotify in any device !!!"
+    );
   }
   return (
     <div className="login">

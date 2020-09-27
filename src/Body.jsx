@@ -29,11 +29,14 @@ function Body({ spotify }) {
   };
 
   const playSong = (id) => {
+    console.log(id);
+
     spotify
       .play({
         uris: [`spotify:track:${id}`],
       })
       .then((res) => {
+        console.log(res);
         spotify.getMyCurrentPlayingTrack().then((r) => {
           dispatch({
             type: "SET_ITEM",

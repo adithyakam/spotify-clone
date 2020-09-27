@@ -23,12 +23,12 @@ function App() {
         token: _token,
       });
 
-      spotify.getMyTopArtists().then((response) =>
+      spotify.getMyTopArtists().then((response) => {
         dispatch({
           type: "SET_TOP_ARTISTS",
           top_artists: response,
-        })
-      );
+        });
+      });
 
       spotify.getUserPlaylists().then((playlist) => {
         dispatch({
@@ -37,12 +37,12 @@ function App() {
         });
       });
 
-      spotify.getPlaylist("1NjO8gd4WFiaxzlelxfSAD").then((response) =>
+      spotify.getPlaylist("1NjO8gd4WFiaxzlelxfSAD").then((response) => {
         dispatch({
           type: "SET_DISCOVER_WEEKLY",
           discover_weekly: response,
-        })
-      );
+        });
+      });
 
       spotify.getMe().then((user) => {
         dispatch({
