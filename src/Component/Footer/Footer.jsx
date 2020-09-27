@@ -16,9 +16,7 @@ function Footer({ spotify }) {
   const [{ token, item, playing }, dispatch] = useStateValue();
   useEffect(() => {
     spotify.getMyCurrentPlaybackState().then((r) => {
-      console.log(r);
       if (r) {
-        console.log("in");
         dispatch({
           type: "SET_PLAYING",
           playing: r.is_playing,
@@ -29,7 +27,6 @@ function Footer({ spotify }) {
           item: r.item,
         });
       } else {
-        console.log("in2");
         spotify.getMyRecentlyPlayedTracks().then((res) => {
           console.log(res.items[0].track, "resss");
 
